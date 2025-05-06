@@ -36,7 +36,6 @@
     -fx-background-color: -background-color;
 }
 
-/* Estilos generales */
 .header-box {
     -fx-background-color: linear-gradient(to bottom, #2C2C2E, #1C1C1E);
     -fx-padding: 12;
@@ -55,8 +54,8 @@
     -fx-text-fill: white;
     -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-alignment: center; /* Centra el texto dentro del Label */
-    -fx-padding: 0 0 0 20px; /* Ajuste para compensar el emoji */
+    -fx-alignment: center;
+    -fx-padding: 0 20;
     
 }
 
@@ -185,13 +184,15 @@
 /* Barra de estado */
 .status-bar {
     -fx-background-color: #2C2C2E;
-    -fx-padding: 8 15;
-    -fx-border-color: #3A3A3C;
+    -fx-padding: 0 10;
+    -fx-border-color: transparent;
     -fx-border-width: 1 0 0 0;
+    -fx-alignment: center-left;
 }
 
 .status-label {
     -fx-text-fill: #8E8E93;
+    -fx-background-color: transparent;
     -fx-font-size: 12px;
 }
 
@@ -282,4 +283,60 @@
     -fx-border-color: #3A3A3C;
     -fx-border-radius: 10;
     -fx-border-width: 1;
+}
+
+/* Botón de adjuntar (mantenemos el mismo) */
+.attach-button {
+    -fx-background-color: #3A3A3C;
+    -fx-background-radius: 20;
+    -fx-padding: 10 15;
+    -fx-border-radius: 20;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+    -fx-min-width: 40px;
+    -fx-max-width: 40px;
+    -fx-min-height: 40px;
+    -fx-max-height: 40px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow( gaussian, rgba(0, 255, 255, 0.4), 10, 0.5, 0.0, 0.0 );
+}
+
+.attach-button:hover {
+    -fx-background-color: #48484A;
+}
+
+.attach-icon {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-fill: white;
+}
+
+/* Panel flotante de opciones */
+.file-options-panel {
+    -fx-alignment: BOTTOM_LEFT;
+    -fx-translate-y: -80;
+    -fx-translate-x: 10;
+}
+
+.file-options-container {
+    -fx-background-color: #3A3A3C;
+    -fx-background-radius: 10;
+    -fx-padding: 8 0;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow( gaussian, rgba(0, 255, 255, 0.4), 10, 0.5, 0.0, 0.0 );
+    -fx-border-width: 1;
+}
+
+.file-option-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-padding: 8 20;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER_LEFT;
+    -fx-min-width: 120px;
+}
+
+.file-option-button:hover {
+    -fx-background-color: #48484A;
 }

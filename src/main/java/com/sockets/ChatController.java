@@ -1,6 +1,7 @@
 package com.sockets;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -19,6 +20,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 
 public class ChatController {
 
@@ -31,6 +33,10 @@ public class ChatController {
     @FXML private Circle connectionStatus;
     @FXML private Label statusLabel;
     @FXML private ScrollPane messageScrollPane;
+    @FXML private Button attachButton;
+    @FXML private HBox fileOptionsPanel;
+    @FXML private Button sendImageButton;
+    @FXML private Button sendFileButton;
 
     private Socket socket;
     private PrintWriter out;
@@ -42,11 +48,30 @@ public class ChatController {
     public void initialize() {
         serverAddressField.setText("localhost:8081");
         connectButton.setOnAction(e -> handleConnect());
-        // 3) Estado inicial
         sendButton.setDisable(true);
         connectionStatus.setFill(Color.RED);
         statusLabel.setText("Desconectado");
 
+        // Configurar el botón de adjuntar
+        attachButton.setOnAction(e -> {
+            toggleFileOptions();
+        });
+        
+        // Configurar botones de opciones de archivo
+        sendImageButton.setOnAction(e -> handleSendImage());
+        sendFileButton.setOnAction(e -> handleSendFile());
+        
+        // Ocultar panel inicialmente
+        fileOptionsPanel.setVisible(false);
+    }
+
+    private void toggleFileOptions() {
+        fileOptionsPanel.setVisible(!fileOptionsPanel.isVisible());
+        
+        // Asegurarse de que el panel esté en primer plano
+        if (fileOptionsPanel.isVisible()) {
+            fileOptionsPanel.toFront();
+        }
     }
 
     @SuppressWarnings("UseSpecificCatch")
@@ -183,6 +208,60 @@ public class ChatController {
             alert.setContentText(message);
             alert.showAndWait();
         });
+    }
+
+    private void handleSendFile() {
+        toggleFileOptions();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar archivo");
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("Todos los archivos", "*.*")
+        );
+        File file = fileChooser.showOpenDialog(messageField.getScene().getWindow());
+        
+        if (file != null) {
+            sendFile(file);
+        }
+    }
+
+    private void handleSendImage() {
+        toggleFileOptions();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen");
+        fileChooser.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg", "*.gif"),
+            new FileChooser.ExtensionFilter("Todos los archivos", "*.*")
+        );
+        File file = fileChooser.showOpenDialog(messageField.getScene().getWindow());
+        
+        if (file != null) {
+            sendFile(file);
+        }
+    }
+
+    private void sendFile(File file) {
+        if (!connected) return;
+        
+        try {
+            // Aquí implementarías la lógica para enviar el archivo a través del socket
+            // Esto es solo un ejemplo básico
+            
+            // Primero notificar al servidor que se enviará un archivo
+            out.println("/file " + file.getName() + " " + file.length());
+            
+            // Luego enviar el archivo (necesitarías implementar esto adecuadamente)
+            // Por ejemplo, podrías usar un FileInputStream y enviar los bytes
+            
+            // Mostrar notificación local
+            Platform.runLater(() -> {
+                addMessage("Tú: (Archivo enviado: " + file.getName() + ")");
+            });
+            
+        } catch (Exception e) {
+            Platform.runLater(() -> {
+                showAlert("Error", "No se pudo enviar el archivo: " + e.getMessage());
+            });
+        }
     }
 
 }

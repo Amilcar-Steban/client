@@ -14,16 +14,20 @@
 
     <top>
     <VBox>
-        <HBox fx:id="headerBox" styleClass="header-box" spacing="10" alignment="CENTER">
-            <Label text="Chat" styleClass="title-label"/>
-        </HBox>
+    <HBox styleClass="status-bar" alignment="CENTER_LEFT" spacing="5">
+        <Circle fx:id="connectionStatus" radius="5" fill="red"/>
+        <Label fx:id="statusLabel" text="Desconectado" styleClass="status-label"/>
+    </HBox>
+    <HBox fx:id="headerBox" styleClass="header-box" alignment="CENTER">
+        <Label text="Chat" styleClass="title-label"/>
+    </HBox>
 
-        <HBox styleClass="connection-box" spacing="10" alignment="CENTER">
-            <TextField fx:id="usernameField" promptText="Tu nombre" styleClass="input-field"/>
-            <TextField fx:id="serverAddressField" promptText="Dirección del servidor" styleClass="input-field"/>
-            <Button fx:id="connectButton" text="Conectar" styleClass="action-button"/>
-        </HBox>
-    </VBox>
+    <HBox styleClass="connection-box" spacing="10" alignment="CENTER">
+        <TextField fx:id="usernameField" promptText="Tu nombre" styleClass="input-field"/>
+        <TextField fx:id="serverAddressField" promptText="Dirección del servidor" styleClass="input-field"/>
+        <Button fx:id="connectButton" text="Conectar" styleClass="action-button"/>
+    </HBox>
+</VBox>
 </top>
     
     <center>
@@ -35,21 +39,32 @@
     </center>
     <bottom>
         <VBox>
-            <HBox styleClass="input-container" spacing="10" alignment="CENTER_LEFT">
-                <TextField fx:id="messageField"
-                           HBox.hgrow="ALWAYS"
-                           promptText="Escribe tu mensaje…"
-                           styleClass="message-input"
-                           onAction="#handleSendMessage"/>
-                <Button fx:id="sendButton"
-                        text="Enviar"
-                        styleClass="send-button"
-                        onAction="#handleSendMessage"/>
-            </HBox>
-            <HBox styleClass="status-bar" alignment="CENTER_LEFT" spacing="5">
-                <Circle fx:id="connectionStatus" radius="5" fill="red"/>
-                <Label fx:id="statusLabel" text="Desconectado" styleClass="status-label"/>
-            </HBox>
+            <StackPane>
+                <HBox styleClass="input-container" spacing="10" alignment="CENTER_LEFT">
+                    <Button fx:id="attachButton" styleClass="attach-button">
+                        <graphic>
+                            <Text text="+" styleClass="attach-icon"/>
+                        </graphic>
+                    </Button>
+                    <TextField fx:id="messageField"
+                            HBox.hgrow="ALWAYS"
+                            promptText="Escribe tu mensaje…"
+                            styleClass="message-input"
+                            onAction="#handleSendMessage"/>
+                    <Button fx:id="sendButton"
+                            text="Enviar"
+                            styleClass="send-button"
+                            onAction="#handleSendMessage"/>
+                </HBox>
+                
+                <!-- Panel flotante para opciones de archivo (inicialmente oculto) -->
+                <HBox fx:id="fileOptionsPanel" styleClass="file-options-panel" visible="false">
+                    <VBox styleClass="file-options-container" spacing="5">
+                        <Button fx:id="sendImageButton" text="Imagen" styleClass="file-option-button"/>
+                        <Button fx:id="sendFileButton" text="Archivo" styleClass="file-option-button"/>
+                    </VBox>
+                </HBox>
+            </StackPane>
         </VBox>
     </bottom>
 </BorderPane>
