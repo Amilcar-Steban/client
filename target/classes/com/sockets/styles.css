@@ -1,0 +1,285 @@
+/* Colores principales al estilo Apple oscuro */
+.root {
+    -primary-color: #0A84FF;
+    -secondary-color: #0071E3;
+    -background-color: #1C1C1E;
+    -chat-background: #2C2C2E;
+    -text-color: #FFFFFF;
+    -light-text: #8E8E93;
+    -success-color: #30D158;
+    -error-color: #FF453A;
+    -user-message: #0A84FF;
+    -other-message: #3A3A3C;
+    -fx-min-width: 800px;
+    -fx-pref-width: 800px;
+    -fx-max-width: 800px;
+    -fx-min-height: 850px;
+    -fx-pref-height: 850px;
+    -fx-max-height: 850px;
+    -fx-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: white
+}
+
+.label, .text-field, .text-area {
+    -fx-text-fill: white;
+    -fx-background-color: #2e2e2e;
+}
+
+/* Fondo oscuro para toda la ventana */
+.scene {
+    -fx-background-color: -background-color;
+}
+
+/* Estilo para el stage (ventana principal) */
+.stage {
+    -fx-background-color: -background-color;
+}
+
+/* Estilos generales */
+.header-box {
+    -fx-background-color: linear-gradient(to bottom, #2C2C2E, #1C1C1E);
+    -fx-padding: 12;
+    -fx-spacing: 10;
+    -fx-border-width: 0 0 1 0;
+    -fx-alignment: center;
+}
+
+
+.title-box {
+    -fx-alignment: center;
+}
+
+.title-label {
+    -fx-background-color: linear-gradient(to bottom, #2C2C2E, #1C1C1E);
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-alignment: center; /* Centra el texto dentro del Label */
+    -fx-padding: 0 0 0 20px; /* Ajuste para compensar el emoji */
+    
+}
+
+.connection-box {
+    -fx-background-color: #1C1C1E;
+    -fx-padding: 10;
+    -fx-border-width: 0 0 1 0;
+}
+
+.input-field {
+    -fx-background-color: #3A3A3C;
+    -fx-background-radius: 20;
+    -fx-padding: 8 15;
+    -fx-border-radius: 20;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #8E8E93;
+    -fx-effect: dropshadow( gaussian, rgba(0, 255, 255, 0.4), 10, 0.5, 0.0, 0.0 );
+}
+
+.input-field:focused {
+    -fx-border-color: #0A84FF;
+    -fx-effect: dropshadow( gaussian, rgba(0, 255, 255, 0.4), 10, 0.5, 0.0, 0.0 );
+}
+
+.action-button {
+    -fx-background-color: #3A3A3C;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-padding: 8 20;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow( gaussian, rgba(0, 255, 255, 0.4), 10, 0.5, 0.0, 0.0 );
+}
+
+.action-button:hover {
+    -fx-background-color: #48484A;
+    -fx-effect: dropshadow( gaussian, rgba(0, 255, 255, 0.4), 10, 0.5, 0.0, 0.0 );
+}
+
+/* Área de chat */
+.chat-container {
+    -fx-background-color: -background-color;
+    -fx-padding: 0;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-fit-to-width: true;
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #3A3A3C;
+    -fx-background-radius: 5em;
+}
+
+.message-container {
+    -fx-padding: 15;
+    -fx-spacing: 8;
+    -fx-background-color: -background-color;
+    -fx-alignment: top-center;
+}
+
+/* Input de mensajes */
+.input-container {
+    -fx-padding: 15;
+    -fx-background-color: #2C2C2E;
+    -fx-border-color: #3A3A3C;
+    -fx-border-width: 1 0 0 0;
+    -fx-alignment: center;
+}
+
+.message-input {
+    -fx-background-color: #3A3A3C;
+    -fx-background-radius: 20;
+    -fx-padding: 10 15;
+    -fx-border-radius: 20;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #8E8E93;
+    -fx-pref-width: 100%;
+    -fx-max-width: infinity;
+    -fx-effect: dropshadow( gaussian, rgba(0, 255, 255, 0.4), 10, 0.5, 0.0, 0.0 );
+}
+
+.message-input:focused {
+    -fx-border-color: #0A84FF;
+}
+
+.send-button {
+    -fx-background-color: -primary-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-padding: 10 25;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-min-width: 80px;
+    -fx-effect: dropshadow( gaussian, rgba(0, 255, 255, 0.4), 10, 0.5, 0.0, 0.0 );
+}
+
+.send-button:hover {
+    -fx-background-color: -secondary-color;
+    -fx-effect: dropshadow( gaussian, rgba(0, 255, 255, 0.4), 10, 0.5, 0.0, 0.0 );
+}
+
+/* Barra de estado */
+.status-bar {
+    -fx-background-color: #2C2C2E;
+    -fx-padding: 8 15;
+    -fx-border-color: #3A3A3C;
+    -fx-border-width: 1 0 0 0;
+}
+
+.status-label {
+    -fx-text-fill: #8E8E93;
+    -fx-font-size: 12px;
+}
+
+/* Estilos para mensajes */
+.message-bubble {
+    -fx-background-radius: 15;
+    -fx-padding: 8 12;
+    -fx-margin: 5 0;
+    -fx-max-width: 400px;
+    -fx-wrap-text: true;
+    -fx-text-fill: white;
+}
+
+.user-message {
+    -fx-background-color: -user-message;
+    -fx-text-fill: white;
+    -fx-background-radius: 15 15 0 15;
+    -fx-alignment: center-right;
+    -fx-padding: 8 12;
+    -fx-margin: 5 0 5 10;
+}
+
+.other-message {
+    -fx-background-color: -other-message;
+    -fx-text-fill: white;
+    -fx-background-radius: 15 15 15 0;
+    -fx-alignment: center-left;
+    -fx-padding: 8 12;
+    -fx-margin: 5 10 5 0;
+}
+
+.message-sender {
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-text-fill: #8E8E93;
+}
+
+.message-time {
+    -fx-font-size: 10px;
+    -fx-text-fill: #8E8E93;
+    -fx-font-style: italic;
+}
+
+/* Estilo del círculo de conexión */
+#connectionStatus {
+    -fx-stroke: #3A3A3C;
+}
+
+#connectionStatus.connected {
+    -fx-fill: -success-color;
+}
+
+#connectionStatus.disconnected {
+    -fx-fill: -error-color;
+}
+
+
+.window-control {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 5 10;
+    -fx-cursor: hand;
+}
+
+.window-control:hover {
+    -fx-background-color: rgba(255,255,255,0.1);
+}
+
+.window-control.close:hover {
+    -fx-background-color: #ff5f57;
+}
+
+.control-icon {
+    -fx-font-family: "Arial";
+    -fx-font-size: 12px;
+    -fx-fill: white;
+}
+
+.close .control-icon {
+    -fx-font-size: 10px;
+}
+
+.connection-panel {
+    -fx-background-color: linear-gradient(to bottom, #2C2C2E, #1C1C1E);
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-border-color: #3A3A3C;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+}
