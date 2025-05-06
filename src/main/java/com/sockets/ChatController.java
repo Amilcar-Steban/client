@@ -163,11 +163,11 @@ public class ChatController {
         
         HBox wrapper = new HBox(label);
         wrapper.setAlignment(isMyMessage ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
-        wrapper.setMaxWidth(Double.MAX_VALUE); // Para que ocupe todo el ancho disponible
+        wrapper.setMaxWidth(Double.MAX_VALUE); 
         HBox.setHgrow(wrapper, Priority.ALWAYS);
         
         messageContainer.getChildren().add(wrapper);
-        messageScrollPane.setVvalue(1.0); // Auto-scroll al final
+        messageScrollPane.setVvalue(1.0); 
     }
 
     private void updateUIOnConnection(boolean connectedNow) {
