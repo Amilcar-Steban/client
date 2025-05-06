@@ -6,12 +6,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.util.Base64;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -150,6 +153,11 @@ public class ChatController {
     private void addMessage(String rawMessage) {
         // Determinar si el mensaje es propio (contiene el nombre de usuario)
         boolean isMyMessage = rawMessage.startsWith(usernameField.getText() + ":");
+
+        if (rawMessage.startsWith("/file ")) {
+            handleFileMessage(rawMessage);
+            return;
+        }
         
         Label label = new Label(rawMessage);
         label.setWrapText(true);
@@ -239,30 +247,78 @@ public class ChatController {
         }
     }
 
-    private void sendFile(File file) {
-        if (!connected) return;
+    private void handleFileMessage(String fileMessage) {
+    try {
+        String[] parts = fileMessage.split(" ", 4);
+        String fileName = parts[1];
+        String fileData = parts[3];
         
-        try {
-            // Aquí implementarías la lógica para enviar el archivo a través del socket
-            // Esto es solo un ejemplo básico
+        // Crear elemento interactivo
+        Hyperlink downloadLink = new Hyperlink(fileName);
+        downloadLink.getStyleClass().add("file-message");
+        
+        // Estilo según remitente
+        boolean isMyMessage = fileMessage.startsWith(usernameField.getText() + ":");
+        String styleClass = isMyMessage ? "user-message" : "other-message";
+        downloadLink.getStyleClass().add(styleClass);
+        
+        // Acción de descarga
+        downloadLink.setOnAction(e -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar archivo");
+            fileChooser.setInitialFileName(fileName);
+            File saveFile = fileChooser.showSaveDialog(messageScrollPane.getScene().getWindow());
             
-            // Primero notificar al servidor que se enviará un archivo
-            out.println("/file " + file.getName() + " " + file.length());
-            
-            // Luego enviar el archivo (necesitarías implementar esto adecuadamente)
-            // Por ejemplo, podrías usar un FileInputStream y enviar los bytes
-            
-            // Mostrar notificación local
-            String formattedMessage = usernameField.getText() + ": " + file.getName();
-            Platform.runLater(() -> {
-                addMessage(formattedMessage);
-            });
-            
-        } catch (Exception e) {
-            Platform.runLater(() -> {
-                showAlert("Error", "No se pudo enviar el archivo: " + e.getMessage());
-            });
-        }
+            if (saveFile != null) {
+                try {
+                    byte[] decodedBytes = Base64.getDecoder().decode(fileData);
+                    Files.write(saveFile.toPath(), decodedBytes);
+                } catch (IOException ex) {
+                    showAlert("Error", "No se pudo guardar el archivo");
+                }
+            }
+        });
+        
+        HBox wrapper = new HBox(downloadLink);
+        wrapper.setAlignment(isMyMessage ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
+        wrapper.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(wrapper, Priority.ALWAYS);
+        
+        Platform.runLater(() -> {
+            messageContainer.getChildren().add(wrapper);
+            messageScrollPane.setVvalue(1.0);
+        });
+        
+    } catch (Exception e) {
+        System.err.println("Error procesando archivo: " + e.getMessage());
     }
+}
+
+    private void sendFile(File file) {
+    if (!connected) return;
+    
+    try {
+        // Leer el archivo y convertirlo a Base64
+        byte[] fileBytes = Files.readAllBytes(file.toPath());
+        String encodedFile = Base64.getEncoder().encodeToString(fileBytes);
+        
+        // Enviar comando especial con metadatos
+        String fileCommand = String.format("/file %s %d %s", 
+                                         file.getName(), 
+                                         fileBytes.length, 
+                                         encodedFile);
+        
+        out.println(fileCommand);
+        
+        // Mostrar mensaje local con enlace de descarga
+        String formattedMessage = usernameField.getText() + ": [" + file.getName() + "]";
+        Platform.runLater(() -> addMessage(formattedMessage));
+        
+    } catch (Exception e) {
+        Platform.runLater(() -> {
+            showAlert("Error", "No se pudo enviar el archivo: " + e.getMessage());
+        });
+    }
+}
 
 }

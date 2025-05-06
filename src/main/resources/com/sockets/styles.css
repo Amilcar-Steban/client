@@ -207,7 +207,7 @@
 }
 
 .user-message {
-    -fx-background-color: -user-message;
+    -fx-background-color: rgba(0, 255, 255, 0.4);
     -fx-text-fill: white;
     -fx-background-radius: 15 15 0 15;
     -fx-alignment: center-right;
@@ -344,4 +344,17 @@
 
 .file-option-button:hover {
     -fx-background-color: #48484A;
+}
+
+.file-message {
+    -fx-text-fill: white;
+    -fx-underline: true;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5;
+    -fx-padding: 5px;
+}
+
+.file-message:hover {
+    -fx-text-fill: #0A84FF;
+    -fx-cursor: hand;
 }
