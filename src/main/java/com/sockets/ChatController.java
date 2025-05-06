@@ -253,8 +253,9 @@ public class ChatController {
             // Por ejemplo, podrías usar un FileInputStream y enviar los bytes
             
             // Mostrar notificación local
+            String formattedMessage = usernameField.getText() + ": " + file.getName();
             Platform.runLater(() -> {
-                addMessage("Tú: (Archivo enviado: " + file.getName() + ")");
+                addMessage(formattedMessage);
             });
             
         } catch (Exception e) {

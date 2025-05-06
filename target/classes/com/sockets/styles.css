@@ -1,7 +1,7 @@
 /* Colores principales al estilo Apple oscuro */
 .root {
-    -primary-color: #0A84FF;
-    -secondary-color: #0071E3;
+    -primary-color: #48484A;
+    -secondary-color: rgba(0, 255, 255, 0.4);
     -background-color: #1C1C1E;
     -chat-background: #2C2C2E;
     -text-color: #FFFFFF;
@@ -140,8 +140,8 @@
 /* Input de mensajes */
 .input-container {
     -fx-padding: 15;
-    -fx-background-color: #2C2C2E;
-    -fx-border-color: #3A3A3C;
+    -fx-background-color: linear-gradient(to bottom, #1C1C1E, #2C2C2E);
+    -fx-border-color: transparent;
     -fx-border-width: 1 0 0 0;
     -fx-alignment: center;
 }
@@ -303,12 +303,17 @@
 
 .attach-button:hover {
     -fx-background-color: #48484A;
+    
 }
 
 .attach-icon {
     -fx-font-size: 18px;
     -fx-font-weight: bold;
-    -fx-fill: white;
+    -fx-fill: #8E8E93;
+}
+
+.attach-icon:hover {
+    -fx-fill: #ffffff;
 }
 
 /* Panel flotante de opciones */
