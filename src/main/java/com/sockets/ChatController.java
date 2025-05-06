@@ -53,7 +53,7 @@ public class ChatController {
         connectButton.setOnAction(e -> handleConnect());
         sendButton.setDisable(true);
         connectionStatus.setFill(Color.RED);
-        statusLabel.setText("Desconectado");
+        statusLabel.setText("Offline");
 
         // Configurar el botón de adjuntar
         attachButton.setOnAction(e -> {
@@ -184,7 +184,7 @@ public class ChatController {
         connectButton.setText(connectedNow ? "Desconectar" : "Conectar");
         usernameField.setDisable(connectedNow);
         serverAddressField.setDisable(connectedNow);
-        statusLabel.setText(connectedNow ? "Conectado" : "Desconectado");
+        statusLabel.setText(connectedNow ? "Online" : "Offline");
     }
 
     private void disconnect() {
@@ -311,7 +311,7 @@ public class ChatController {
         out.println(fileCommand);
         
         // Mostrar mensaje local con enlace de descarga
-        String formattedMessage = usernameField.getText() + ": [" + file.getName() + "]";
+        String formattedMessage = usernameField.getText() + ": " + file.getName();
         Platform.runLater(() -> addMessage(formattedMessage));
         
     } catch (Exception e) {

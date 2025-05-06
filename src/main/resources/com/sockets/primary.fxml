@@ -16,7 +16,7 @@
     <VBox>
     <HBox styleClass="status-bar" alignment="CENTER_LEFT" spacing="5">
         <Circle fx:id="connectionStatus" radius="5" fill="red"/>
-        <Label fx:id="statusLabel" text="Desconectado" styleClass="status-label"/>
+        <Label fx:id="statusLabel" text="Offline" styleClass="status-label"/>
     </HBox>
     <HBox fx:id="headerBox" styleClass="header-box" alignment="CENTER">
         <Label text="Chat" styleClass="title-label"/>

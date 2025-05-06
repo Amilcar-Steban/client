@@ -50,7 +50,7 @@
 }
 
 .title-label {
-    -fx-background-color: linear-gradient(to bottom, #2C2C2E, #1C1C1E);
+    -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-font-size: 24px;
     -fx-font-weight: bold;
